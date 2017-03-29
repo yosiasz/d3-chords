@@ -16,11 +16,11 @@ Make sure you initialize mongoDB before running.
 
 1. Refer to [Detailed installation guides](https://www.turnkeylinux.org/mongodb) to set up a mongoDB instance.
 
-2. Via web console management create a database called d3nodeexpressmongoDB
+2. Via web console management create a database called d3chords
    create user: mongouser
    password:    d3Mongodb
    You will be using this in ./config/configmongo.js
-    mongodb://mongouser:d3Mongodb@10.0.0.19:27017/d3nodeexpressmongoDB
+    mongodb://mongouser:d3Mongodb@your.server.ip:27017/d3chords
 
 3. Via web console management create a collection named populations
 

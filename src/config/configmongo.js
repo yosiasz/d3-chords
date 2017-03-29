@@ -5,5 +5,5 @@
 var module;
 
 module.exports = {
-    'url' : 'mongodb://mongouser:d3Mongodb@0.0.0.0:27017/d3chords'
+    'url' : 'mongodb://mongouser:d3Mongodb@your.server.ip:27017/d3chords'
 };
