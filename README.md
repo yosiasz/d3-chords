@@ -55,3 +55,8 @@ This will use node to launch the server (this will also seed your mongoDB using 
 npm start
 ```
 Leave the server running, and now you can access [http://localhost:5000/](http://localhost:5000/).
+
+#### 3. Chords extracted from 
+https://www.ultimate-guitar.com/lessons/chords/all_guitar_chords.html
+https://tabs.ultimate-guitar.com/m/misc/all_the_chords_crd.htm
+http://jguitar.com/chordsearch?chordsearch=C
