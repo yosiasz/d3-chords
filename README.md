@@ -1,4 +1,4 @@
-# Chart Stack
+# Music Chords using d3
 A simple repo to demo use of data from mongoDB to plot
 musical chords as charts using D3.js with a rest api with express.js
 
