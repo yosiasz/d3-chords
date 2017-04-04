@@ -3,7 +3,7 @@ A simple repo to demo use of data from mongoDB to plot
 musical chords as charts using D3.js with a rest api with express.js
 
 #Preview of the site looks like
-![My image](yosiasz.github.com/d3-chords/src/images/chords.png)
+![My image](d3-chords/src/images/chords.png)
 
 ## Dependencies
 NodeJS runs the server-side of the app. mongoDB is used for storing data to be displayed on graphs.
