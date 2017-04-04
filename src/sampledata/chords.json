@@ -32,4 +32,22 @@
 	}, {
 		"marker": 3
 	}]
+}
+, {
+	"Instrument": "Guitar",
+	"name": "A",
+	"quality": "7sus4",
+	"strings": [{
+		"marker": 0
+	}, {
+		"marker": 0
+	}, {
+		"marker": 2
+	}, {
+		"marker": 0
+	}, {
+		"marker": 3
+	}, {
+		"marker": 0
+	}]
 }]

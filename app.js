@@ -22,6 +22,12 @@ app.set('view engine', 'ejs');
 
 //app.use('/chords', chordRouter.getChords());
 
+app.get('/chords', function (req, res) {
+    res.render('chords', {
+        title: 'Chord Chart'
+    });
+});
+
 app.get('/', function (req, res) {
     res.render('index', {
         title: 'Chord Chart'
