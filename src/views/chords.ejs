@@ -8,9 +8,13 @@
     <script>
 
       d3.csv("../sampledata/chords3.csv", function(data) {
-        var fingering = data[0].fingering;
+              data.forEach(function(d) {
+                  d["fingering"] = +d["fingering"];
+                });
+                console.log(data[0]);        
+        /*var fingering = data[0].fingering;
         var splitfingering = fingering.split("");
-        console.log(splitfingering);
+        console.log(splitfingering);*/
       });
 
       

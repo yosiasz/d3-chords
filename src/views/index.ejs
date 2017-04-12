@@ -1,118 +1,78 @@
 <html>
   <head>
     <script src="https://d3js.org/d3.v4.0.0-alpha.40.min.js"></script>
+    <script src="https://d3js.org/d3-scale.v1.min.js"></script>
   </head>
   <body>
     <svg id=block></svg><P>
-    <button onClick='update()'>Change</button>
     <script>
-      var data1 = {
-        name:"C",
-        quality:"maj",
-        strings:[
-          {marker:0},
-          {marker:3},
-          {marker:2},
-          {marker:0},
-          {marker:1},
-          {marker:0}
-          ]
-      }
-     var data2 = {
-        name:"G",
-        quality:"maj",
-        strings:[
-          {marker:3},
-          {marker:2},
-          {marker:0},
-          {marker:0},
-          {marker:3},
-          {marker:3}
-          ]
-      }    
-      var data = data2;
-      var height = 100;
-      var width  = 100;
-      
-      var block = d3.select("#block")
-                        .attr("width",width+50)
-                        .attr("height",height+50)
-                        .append("g")
-                        .attr("transform","translate(25,25)");
-      var grid = block.append("g");
-      
-      
-      for(var i=0;i<data.strings.length;i++){
-        var xSpacing = width / (data.strings.length-1);
-        grid.append("line")
-            .attr("x1",i*xSpacing)
-            .attr("y1",0)
-            .attr("x2",i*xSpacing)
-            .attr("y2",height)
-            .style("stroke","black");
-      }
-      var frets = d3.max(data.strings,function(d){return d.marker;});
-       for(var i=0;i<=frets;i++){
-        var ySpacing = height / frets;
-        grid.append("line")
-            .attr("x1",0)
-            .attr("y1",i*ySpacing)
-            .attr("x2",width)
-            .attr("y2",i*ySpacing)
-            .style("stroke","black");
-      }     
+        var dataset;  //Global variable
+        var max = 10, data = [];
 
-      var stringScale = d3.scaleLinear()
-                          .domain([0,data.strings.length-1])
-                          .range([0,width]);
-      var fretScale = d3.scaleLinear()
-                          .domain([0,frets])
-                          .range([0-height/frets/2,height-height/frets/2]);
-
-      var markerGroup = block.append("g").classed("markers",true);
-      markers = markerGroup.selectAll("cirlce").data(data.strings,function(d,i){return i;});
-      
-      markers.enter().append("circle")
-                     .attr("cx",function(d,i){
-                            return stringScale(i);
-                     })
-                     .attr("cy",function(d,i){
-                            return fretScale(d.marker);
-                     })
-                     .attr("r",function(d,i){
-                            if(d.marker == 0) {return 0;}
-                            return 10;
-                     })
-                     .style("stroke","red");
+/*        d3.csv("../sampledata/chords3.csv", function(err, data) {            
+            drawChords(data)                
+        });*/
         
-      var inc = 0;
-      
-      function update(){
+        d3.csv("../sampledata/chords3.csv", drawChords);
+        
+      function drawChords(err, data){
+        dataset = data.map(d => ({ name: d.chordname, strings: d.fingering.split("").map((s) => ( {marker: s} ) )} ));
+        var data = dataset[0];
 
-                if(inc % 2  == 0){
-                    data = data1;
-                } else {
-                    data = data2;
-                }
-                inc++;
-         
-                
-                d3.select(".markers").selectAll("circle")
-                .data(data.strings,function(d,i){return i;})
-                .transition()
-                .duration(750)
-                .attr("cx",function(d,i){
-                        return stringScale(i);
-                })
-                .attr("cy",function(d,i){
-                    return fretScale(d.marker);
-                })
-                .attr("r",function(d,i){
-                    if(d.marker == 0) {return 0;}
-                    return 10;
-                });
-      }
-      
+        var height = 100;
+        var width  = 100;
+        //```
+        var block = d3.select("#block")
+                          .attr("width",width+50)
+                          .attr("height",height+50)
+                          .append("g")
+                          .attr("transform","translate(25,25)");
+        var grid = block.append("g");             
+        
+        for(var i=0;i<data.strings.length;i++){
+          var xSpacing = width / (data.strings.length-1);
+          grid.append("line")
+              .attr("x1",i*xSpacing)
+              .attr("y1",0)
+              .attr("x2",i*xSpacing)
+              .attr("y2",height)
+              .style("stroke","black");
+        }
+        var frets = d3.max(data.strings,function(d){return d.marker;});
+        for(var i=0;i<=frets;i++){
+          var ySpacing = height / frets;
+          grid.append("line")
+              .attr("x1",0)
+              .attr("y1",i*ySpacing)
+              .attr("x2",width)
+              .attr("y2",i*ySpacing)
+              .style("stroke","black");
+        }     
+
+        var stringScale = d3.scaleLinear()
+                            .domain([0,data.strings.length-1])
+                            .range([0,width]);
+        var fretScale = d3.scaleLinear()
+                            .domain([0,frets])
+                            .range([0-height/frets/2,height-height/frets/2]);
+
+        var markerGroup = block.append("g").classed("markers",true);
+        markers = markerGroup.selectAll("circle").data(data.strings,function(d,i){return i;});
+        
+        markers.enter().append("circle")
+                      .attr("cx",function(d,i){
+                              return stringScale(i);
+                      })
+                      .attr("cy",function(d,i){
+                              return fretScale(d.marker);
+                      })
+                      .attr("r",function(d,i){
+                              if(d.marker == 0) {return 0;}
+                              return 10;
+                      })
+                      .style("stroke","red"); 
+
+      }        
     </script>
   </body>
 </html>
